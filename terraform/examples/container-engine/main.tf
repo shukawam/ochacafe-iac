@@ -1,4 +1,4 @@
-module "shukawam-containerengine_cluster" {
+module "shukawam_containerengine_cluster" {
   source                                    = "../../modules/container-engine"
   compartment_ocid                          = var.compartment_ocid
   region                                    = var.region
