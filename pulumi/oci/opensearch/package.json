@@ -1,0 +1,16 @@
+{
+    "name": "opensearch",
+    "main": "index.ts",
+    "scripts": {
+        "tsc": "tsc"
+    },
+    "devDependencies": {
+        "@types/node": "^16",
+        "ts-node": "^10.9.1"
+    },
+    "dependencies": {
+        "@pulumi/oci": "^0.16.0",
+        "@pulumi/pulumi": "^3.0.0",
+        "dotenv": "^16.0.3"
+    }
+}
