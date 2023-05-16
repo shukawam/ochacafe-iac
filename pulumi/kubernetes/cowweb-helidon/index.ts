@@ -1,13 +1,26 @@
+import * as pulumi from "@pulumi/pulumi";
 import * as k8s from "@pulumi/kubernetes";
 import * as kx from "@pulumi/kubernetesx";
 
-require("dotenv").config();
+interface Data {
+  namespace: string;
+  deployment: {
+    replicas: number;
+  };
+  ingress: {
+    host: string;
+    tls: {
+      hosts: string[];
+      secretName: string;
+    };
+  };
+}
+
+let config = new pulumi.Config();
+const data = config.requireObject<Data>("data");
 
 const appName = "k8s-helidon-app";
 const appLabels = { app: appName };
-const host = "helidon.shukawam.me";
-
-const namespace = process.env.NAMESPACE ?? "default";
 
 function defaultProbeGenerator(path: string) {
   return {
@@ -25,7 +38,7 @@ const deployment = new k8s.apps.v1.Deployment(appName, {
   apiVersion: "apps/v1",
   metadata: {
     name: appName,
-    namespace: namespace,
+    namespace: data.namespace,
   },
   spec: {
     replicas: 3,
@@ -54,7 +67,7 @@ const service = new k8s.core.v1.Service(appName, {
   apiVersion: "v1",
   metadata: {
     name: appName,
-    namespace: namespace,
+    namespace: data.namespace,
     labels: {
       app: appName,
       "prometheus.io/scrape": "true",
@@ -67,43 +80,48 @@ const service = new k8s.core.v1.Service(appName, {
   },
 });
 
-// const ingress = new k8s.networking.v1.Ingress(appName, {
-//   kind: "Ingress",
-//   apiVersion: "networking.k8s.io/v1",
-//   metadata: {
-//     name: appName,
-//     namespace: namespace,
-//     annotations: {
-//       "kubernetes.io/ingress.class": "nginx",
-//       "cert-manager.io/cluster-issuer": "letsencrypt-prod",
-//     },
-//   },
-//   spec: {
-//     tls: [{ hosts: [host], secretName: "shukawam-tls-secret" }],
-//     rules: [
-//       {
-//         host: host,
-//         http: {
-//           paths: [
-//             {
-//               backend: {
-//                 service: {
-//                   name: appName,
-//                   port: {
-//                     number: 8080,
-//                   },
-//                 },
-//               },
-//               pathType: "Prefix",
-//               path: "/",
-//             },
-//           ],
-//         },
-//       },
-//     ],
-//   },
-// });
+const ingress = new k8s.networking.v1.Ingress(appName, {
+  kind: "Ingress",
+  apiVersion: "networking.k8s.io/v1",
+  metadata: {
+    name: appName,
+    namespace: data.namespace,
+    annotations: {
+      "kubernetes.io/ingress.class": "nginx",
+      "cert-manager.io/cluster-issuer": "letsencrypt-prod",
+    },
+  },
+  spec: {
+    tls: [
+      {
+        hosts: data.ingress.tls.hosts,
+        secretName: data.ingress.tls.secretName,
+      },
+    ],
+    rules: [
+      {
+        host: data.ingress.tls.hosts[0],
+        http: {
+          paths: [
+            {
+              backend: {
+                service: {
+                  name: appName,
+                  port: {
+                    number: 8080,
+                  },
+                },
+              },
+              pathType: "Prefix",
+              path: "/",
+            },
+          ],
+        },
+      },
+    ],
+  },
+});
 
 export const deploymentName = deployment.metadata.name;
 export const serviceName = service.metadata.name;
-// export const ingressName = ingress.metadata.name;
+export const ingressName = ingress.metadata.name;

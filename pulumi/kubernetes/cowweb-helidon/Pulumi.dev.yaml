@@ -1,0 +1,11 @@
+config:
+  cowweb-helidon:data:
+    namespace: dev
+    deployment:
+      replicas: 3
+    ingress:
+      host: helidon.dev.shukawam.me
+      tls:
+        hosts:
+          - helidon.dev.shukawam.me
+        secretName: shukawam-tls-secret
