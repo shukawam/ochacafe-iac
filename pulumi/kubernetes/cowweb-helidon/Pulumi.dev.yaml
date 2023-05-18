@@ -2,7 +2,7 @@ config:
   cowweb-helidon:data:
     namespace: dev
     deployment:
-      replicas: 3
+      replicas: 1
     ingress:
       host: helidon.dev.shukawam.me
       tls:

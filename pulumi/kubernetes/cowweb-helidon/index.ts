@@ -41,7 +41,7 @@ const deployment = new k8s.apps.v1.Deployment(appName, {
     namespace: data.namespace,
   },
   spec: {
-    replicas: 3,
+    replicas: data.deployment.replicas,
     selector: { matchLabels: appLabels },
     template: {
       metadata: { labels: appLabels },
