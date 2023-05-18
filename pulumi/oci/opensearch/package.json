@@ -5,7 +5,7 @@
         "tsc": "tsc"
     },
     "devDependencies": {
-        "@types/node": "^16",
+        "@types/node": "^18.0.0",
         "ts-node": "^10.9.1"
     },
     "dependencies": {
