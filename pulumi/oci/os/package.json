@@ -6,6 +6,6 @@
     },
     "dependencies": {
         "@pulumi/pulumi": "3.60.0",
-        "@pulumi/oci": "0.13.0"
+        "@pulumi/oci": "0.17.0"
     }
 }
