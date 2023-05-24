@@ -1,0 +1,39 @@
+name: Testing Terraform Modules examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
+      OCI_CLI_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
+      OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
+      OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
+      OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
+
+    steps:
+      - uses: actions/checkout@3
+
+      - name: Set up Go
+        uses: actions/setup-go@3
+        with:
+          go-version: "1.19"
+
+      - name: Set up dependencies
+        working-directory: test/
+        run: |
+          go mod tidy
+
+      - name: Testing modules
+        working-directory: test/
+        run: |
+          go test
