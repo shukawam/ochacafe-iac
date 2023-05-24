@@ -15,6 +15,7 @@ func TestObjectStorageFirstStep(t *testing.T) {
 		TerraformDir: "../terraform/examples/object-storage-first-step",
 		Vars: map[string]interface{}{
 			"compartment_ocid":          os.Getenv("COMPARTMENT_ID"),
+			"region":                    "ap-tokyo-1",
 			"objectstorage_namespace":   "orasejapan",
 			"objectstorage_bucket_name": "test-bucket",
 		},
