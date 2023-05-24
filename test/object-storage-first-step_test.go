@@ -1,6 +1,7 @@
 package test
 
 import (
+	"os"
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
@@ -12,8 +13,12 @@ func TestObjectStorageFirstStep(t *testing.T) {
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		TerraformDir: "../terraform/examples/object-storage-first-step",
-		VarFiles:     []string{"varfile.tfvars"},
-		NoColor:      false,
+		Vars: map[string]interface{}{
+			"compartment_ocid":          os.Getenv("COMPARTMENT_ID"),
+			"objectstorage_namespace":   "orasejapan",
+			"objectstorage_bucket_name": "test-bucket",
+		},
+		NoColor: false,
 	})
 
 	defer terraform.Destroy(t, terraformOptions)
