@@ -1,3 +1,5 @@
+#####
+# Provider
 variable "region" {
   description = "OCI Region Identifier. (e.g. ap-tokyo-1, ...)"
 }
@@ -28,6 +30,8 @@ variable "compartment_ocid" {
   description = "OCID of compartment."
 }
 
+#####
+# Object Storage
 variable "objectstorage_namespace" {
   description = "Namespace of Object Storage."
 }
