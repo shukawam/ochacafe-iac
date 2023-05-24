@@ -10,13 +10,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    env:
-      TF_VAR_REGION: ${{ secrets.OCI_CLI_REGION }}
-      TF_VAR_USER: ${{ secrets.OCI_CLI_USER }}
-      TF_VAR_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
-      TF_VAR_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
-      TF_VAR_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
-
     steps:
       - uses: actions/checkout@v3
 
@@ -32,5 +25,11 @@ jobs:
 
       - name: Testing modules
         working-directory: test/
+        env:
+          TF_VAR_REGION: ${{ secrets.OCI_CLI_REGION }}
+          TF_VAR_USER: ${{ secrets.OCI_CLI_USER }}
+          TF_VAR_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
+          TF_VAR_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
+          TF_VAR_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
         run: |
           go test
