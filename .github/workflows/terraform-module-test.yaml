@@ -30,5 +30,6 @@ jobs:
           TF_VAR_tenancy_ocid: ${{ secrets.TENANCY }}
           TF_VAR_fingerprint: ${{ secrets.FINGERPRINT }}
           TF_VAR_private_key: ${{ secrets.PRIVATE_KEY }}
+          TF_VAR_compartment_ocid: ${{ secrets.COMPARTMENT_ID }}
         run: |
           go test
