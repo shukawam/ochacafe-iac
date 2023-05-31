@@ -2,8 +2,13 @@
 # VCN
 module "shukawam_vcn" {
   source           = "../../modules/vcn"
-  compartment_ocid = var.compartment_ocid
   region           = var.region
+  tenancy_ocid     = var.tenancy_ocid
+  user_ocid        = var.user_ocid
+  private_key_path = var.private_key_path
+  private_key      = var.private_key
+  fingerprint      = var.fingerprint
+  compartment_ocid = var.compartment_ocid
   vcn_display_name = var.vcn_display_name
 }
 
@@ -11,8 +16,13 @@ module "shukawam_vcn" {
 # Oracle Container Engine for Kubernetes
 module "shukawam_containerengine_cluster" {
   source                                    = "../../modules/container-engine"
-  compartment_ocid                          = var.compartment_ocid
   region                                    = var.region
+  tenancy_ocid                              = var.tenancy_ocid
+  user_ocid                                 = var.user_ocid
+  private_key_path                          = var.private_key_path
+  private_key                               = var.private_key
+  fingerprint                               = var.fingerprint
+  compartment_ocid                          = var.compartment_ocid
   vcn_id                                    = module.shukawam_vcn.vcn.id
   lb_subnet_id                              = module.shukawam_vcn.lb_subnet.id
   node_pool_subnet_id                       = module.shukawam_vcn.node_pool_subnet.id
