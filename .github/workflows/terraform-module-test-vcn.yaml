@@ -1,4 +1,4 @@
-name: Testing Terraform Modules examples
+name: Testing Terraform Modules examples - Object Storage
 
 on:
   workflow_dispatch:
@@ -38,4 +38,4 @@ jobs:
           TF_VAR_private_key: ${{ secrets.PRIVATE_KEY }}
           TF_VAR_compartment_ocid: ${{ secrets.COMPARTMENT_ID }}
         run: |
-          go test
+          go test vcn_test.go
