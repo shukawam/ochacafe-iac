@@ -9,7 +9,7 @@
         "ts-node": "^10.9.1"
     },
     "dependencies": {
-        "@pulumi/oci": "^0.18.0",
+        "@pulumi/oci": "^0.19.0",
         "@pulumi/pulumi": "^3.0.0",
         "dotenv": "^16.0.3"
     }
