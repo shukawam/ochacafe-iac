@@ -2,7 +2,14 @@
 # Kube Config
 module "kube-config" {
   source = "../../modules/kube-config"
-  cluster_id = var.cluster_id
+
+  region           = var.region
+  tenancy_ocid     = var.tenancy_ocid
+  user_ocid        = var.user_ocid
+  private_key_path = var.private_key_path
+  private_key      = var.private_key
+  fingerprint      = var.fingerprint
   compartment_ocid = var.compartment_ocid
-  region = var.region
+
+  cluster_id = var.cluster_id
 }

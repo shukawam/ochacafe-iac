@@ -3,3 +3,4 @@
 *.tfstate.*
 examples/_sandbox/
 *.tfvars
+kubeconfig
