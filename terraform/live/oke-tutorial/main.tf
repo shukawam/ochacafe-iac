@@ -32,3 +32,19 @@ module "shukawam_containerengine_cluster" {
   node_pool_node_shape_config_memory_in_gbs = var.node_pool_node_shape_config_memory_in_gbs
   node_pool_node_shape_config_ocpus         = var.node_pool_node_shape_config_ocpus
 }
+
+#####
+# Kube Config
+module "shukawam_kube_config" {
+  source = "../../modules/kube-config"
+
+  region           = var.region
+  tenancy_ocid     = var.tenancy_ocid
+  user_ocid        = var.user_ocid
+  private_key_path = var.private_key_path
+  private_key      = var.private_key
+  fingerprint      = var.fingerprint
+  compartment_ocid = var.compartment_ocid
+
+  cluster_id = var.cluster_id
+}

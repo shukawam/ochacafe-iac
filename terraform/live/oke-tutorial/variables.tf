@@ -50,3 +50,8 @@ variable "node_pool_node_shape_config_memory_in_gbs" {
 
 variable "node_pool_node_shape_config_ocpus" {
 }
+
+#####
+# Kube Config
+variable "cluster_id" {
+}
