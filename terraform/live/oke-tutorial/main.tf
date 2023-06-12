@@ -46,5 +46,5 @@ module "shukawam_kube_config" {
   fingerprint      = var.fingerprint
   compartment_ocid = var.compartment_ocid
 
-  cluster_id = var.cluster_id
+  cluster_id = module.shukawam_containerengine_cluster.cluster.id
 }
