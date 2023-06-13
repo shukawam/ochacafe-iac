@@ -1,4 +1,4 @@
-name: Testing Terraform Modules examples - Object Storage
+name: Testing Terraform Modules examples - VCN
 
 on:
   workflow_dispatch:
