@@ -38,4 +38,4 @@ jobs:
           TF_VAR_private_key: ${{ secrets.PRIVATE_KEY }}
           TF_VAR_compartment_ocid: ${{ secrets.COMPARTMENT_ID }}
         run: |
-          go test vcn_test.go
+          go test -v vcn_test.go
