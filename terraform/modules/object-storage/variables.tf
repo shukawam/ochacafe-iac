@@ -39,3 +39,7 @@ variable "objectstorage_namespace" {
 variable "objectstorage_bucket_name" {
   description = "Name of Object Storage Bucket."
 }
+
+variable "public_access_type" {
+  description = "Bucket visibility.(NoPublicAccess|ObjectRead|ObjectReadWithoutList)"
+}

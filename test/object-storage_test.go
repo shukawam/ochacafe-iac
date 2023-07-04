@@ -16,6 +16,7 @@ func TestObjectStorage(t *testing.T) {
 			"region":                    "ap-tokyo-1",
 			"objectstorage_namespace":   "orasejapan",
 			"objectstorage_bucket_name": "test-bucket",
+			"public_access_type":        "NoPublicAccess",
 		},
 		NoColor: false,
 	})
